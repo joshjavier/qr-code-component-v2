@@ -28,10 +28,20 @@
         --grayish-blue: hsl(220, 15%, 55%);
         --dark-blue: hsl(218, 44%, 22%);
 
-        --fs-base: 15px;
-
-        --fw-regular: 400;
-        --fw-bold: 700;
+        /* CSS shadows generated with Josh W Comeau's CSS Shadow Palette Generator */
+        --shadow-color: 213deg 19% 72%;
+        --shadow-elevation-low: 0px 1px 1.1px hsl(var(--shadow-color) / 0.17),
+          0px 1.4px 1.6px -1.2px hsl(var(--shadow-color) / 0.17), 0px 3px 3.4px -2.5px hsl(var(--shadow-color) / 0.17);
+        --shadow-elevation-medium: 0px 1px 1.1px hsl(var(--shadow-color) / 0.18),
+          0px 2.7px 3px -0.8px hsl(var(--shadow-color) / 0.18), 0px 6.3px 7.1px -1.7px hsl(var(--shadow-color) / 0.18),
+          0px 15px 16.9px -2.5px hsl(var(--shadow-color) / 0.18);
+        --shadow-elevation-high: 0px 1px 1.1px hsl(var(--shadow-color) / 0.16),
+          0px 3.4px 3.8px -0.4px hsl(var(--shadow-color) / 0.16), 0px 5.9px 6.6px -0.7px hsl(var(--shadow-color) / 0.16),
+          0px 9.4px 10.6px -1.1px hsl(var(--shadow-color) / 0.16),
+          0px 14.6px 16.4px -1.4px hsl(var(--shadow-color) / 0.16),
+          0px 22.6px 25.4px -1.8px hsl(var(--shadow-color) / 0.16),
+          0px 34.1px 38.4px -2.1px hsl(var(--shadow-color) / 0.16),
+          0px 50px 56.3px -2.5px hsl(var(--shadow-color) / 0.16);
       }
 
       * {
@@ -49,32 +59,70 @@
         background-color: var(--light-gray);
         margin: 0;
         min-height: 100vh;
+        display: grid;
+        gap: 1rem;
+        place-content: center;
+        padding: calc(22 / 16 * 1rem);
       }
 
       /* Blocks */
+
+      /**
+       * CARD
+       *
+       * CSS variables for customization (defaults in parens):
+       * --fs-body (15px)
+       * --fs-title (22px)
+       * --br-outer (20px)
+       * --br-inner (10px)
+       */
       .card {
         background-color: white;
         color: var(--grayish-blue);
         max-inline-size: 20rem;
-        padding: 1em;
+        padding: 1rem;
+        padding-bottom: 2.5rem;
+        font-size: var(--fs-body, calc(15 / 16 * 1rem));
+        border-radius: var(--br-outer, calc(20 / 16 * 1rem));
+        text-align: center;
+        box-shadow: var(--shadow-elevation-medium);
       }
-
-      .card img {
-        max-width: 100%;
+      .card .qr {
         display: block;
+        aspect-ratio: 1 / 1;
+        border-radius: var(--br-inner, calc(10 / 16 * 1rem));
+        overflow: hidden;
       }
-
+      .card .qr img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
       .card .title {
         color: var(--dark-blue);
-        font-weight: var(--fw-bold);
+        font-size: var(--fs-title, calc(22 / 16 * 1rem));
+        font-weight: 700;
+        letter-spacing: 0.11px;
+        margin-block: calc(24 / 16 * 1rem) 0;
+      }
+      .card .description {
+        margin-inline: calc(12 / 16 * 1rem);
+        letter-spacing: 0.225px;
+      }
+      .card .description p {
+        margin-block: 1rem 0;
       }
 
       .attribution {
         font-size: 11px;
         text-align: center;
+        display: none;
       }
       .attribution a {
         color: hsl(228, 45%, 44%);
+      }
+      .attribution a:hover {
+        opacity: 0.8;
       }
 
       /* Utilities */
@@ -94,13 +142,13 @@
     <main>
       <h1 class="visually-hidden">QR Code Component</h1>
       <article class="card">
-        <a href="https://www.frontendmentor.io/" target="_blank" rel="external">
-          <img src="images/image-qr-code.png" alt="https://www.frontendmentor.io/" />
+        <a class="qr" href="https://www.frontendmentor.io/" target="_blank" rel="external">
+          <img src="images/image-qr-code.png" alt="Go to frontendmentor.io" />
         </a>
         <h2 class="title">Improve your front-end skills by building projects</h2>
-        <p class="description">
-          Scan the QR code to visit Frontend Mentor and take your coding skills to the next level
-        </p>
+        <div class="description">
+          <p>Scan the QR code to visit Frontend Mentor and take your coding skills to the next level</p>
+        </div>
       </article>
     </main>
 
